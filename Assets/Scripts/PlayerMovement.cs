@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
+    [SerializeField]
+    private float Speed;
 
     private PlayerInput controls;
-    private Vector3 dir;
+    private Vector3 direction;
 
     private void Awake()
     {
@@ -29,21 +30,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Moving(Vector2 direction)
     {
-        dir = new Vector3(direction.x, 0f, direction.y);
+        this.direction = new Vector3(direction.x, 0f, direction.y);
     }
 
     private void Stopping()
     {
-        dir = Vector3.zero;
+        this.direction = Vector3.zero;
     }
 
     private void Update()
     {
-        Move(dir);
+        Move(this.direction);
     }
 
     private void Move(Vector3 direction)
     {
-        transform.position += direction * speed * Time.fixedDeltaTime;
+        transform.position += direction * Speed * Time.fixedDeltaTime;
     }
 }
