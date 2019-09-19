@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float Speed;
+    private float Speed = BlackBoard.PlayerSpeed;
 
     private PlayerInput controls;
     private Vector3 direction;

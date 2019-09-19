@@ -2,8 +2,7 @@
 
 public class PigMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float speed;
+    private float speed = BlackBoard.PigSpeed;
     [SerializeField]
     private LayerMask layer;
 
