@@ -1,17 +1,17 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Input/PlayerInput.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Input/GameInput.inputactions'
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class PlayerInput : IInputActionCollection
+public class GameInput : IInputActionCollection
 {
     private InputActionAsset asset;
-    public PlayerInput()
+    public GameInput()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""PlayerInput"",
+    ""name"": ""GameInput"",
     ""maps"": [
         {
             ""name"": ""Player"",
@@ -665,7 +665,7 @@ public class PlayerInput : IInputActionCollection
         m_UI_TrackedDeviceSelect = m_UI.GetAction("TrackedDeviceSelect");
     }
 
-    ~PlayerInput()
+    ~GameInput()
     {
         UnityEngine.Object.Destroy(asset);
     }
@@ -717,8 +717,8 @@ public class PlayerInput : IInputActionCollection
     private readonly InputAction m_Player_Fire;
     public struct PlayerActions
     {
-        private PlayerInput m_Wrapper;
-        public PlayerActions(PlayerInput wrapper) { m_Wrapper = wrapper; }
+        private GameInput m_Wrapper;
+        public PlayerActions(GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
@@ -774,8 +774,8 @@ public class PlayerInput : IInputActionCollection
     private readonly InputAction m_UI_TrackedDeviceSelect;
     public struct UIActions
     {
-        private PlayerInput m_Wrapper;
-        public UIActions(PlayerInput wrapper) { m_Wrapper = wrapper; }
+        private GameInput m_Wrapper;
+        public UIActions(GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;

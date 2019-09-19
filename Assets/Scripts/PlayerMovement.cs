@@ -6,12 +6,12 @@ public class PlayerMovement : MonoBehaviour
     //Public variables through blackboard
     private float Speed = BlackBoard.PlayerSpeed;
 
-    private PlayerInput controls;
+    private GameInput controls;
     private Vector3 direction;
 
     private void Awake()
     {
-        controls = new PlayerInput();
+        controls = new GameInput();
     }
 
     private void OnEnable()
