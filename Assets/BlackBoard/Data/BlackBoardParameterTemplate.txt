@@ -1,0 +1,7 @@
+    private static BlackBoardType<{0}> {1} = new BlackBoardType<{0}>(nameof({3}), typeof({2}));
+    public static {0} {3}
+    {{
+        get {{ return {1}.GetValue(); }}
+        private set {{ }}
+    }}
+    
