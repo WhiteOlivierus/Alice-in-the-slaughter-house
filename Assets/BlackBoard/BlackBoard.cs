@@ -3,6 +3,13 @@ using BB;
 
 public static class BlackBoard
 {
+    private static BlackBoardType<System.Single> _PigRange = new BlackBoardType<System.Single>(nameof(PigRange), typeof(PigCarry));
+    public static System.Single PigRange
+    {
+        get { return _PigRange.GetValue(); }
+        private set { }
+    }
+    
     private static BlackBoardType<System.Int32> _ButtonOffset = new BlackBoardType<System.Int32>(nameof(ButtonOffset), typeof(PigController));
     public static System.Int32 ButtonOffset
     {
