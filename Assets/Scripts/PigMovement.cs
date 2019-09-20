@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class PigMovement : MonoBehaviour
+/// <summary>
+/// Pig movement behaviour
+/// </summary>
+public class PigMovement : Actions
 {
     //Public variables through blackboard
     private float speed = BlackBoard.PigSpeed;
@@ -19,9 +22,11 @@ public class PigMovement : MonoBehaviour
 
     private void Awake()
     {
+        commands["Move away"] = true;
+        commands["Come back"] = false;
         player = FindObjectOfType<PlayerMovement>().transform;
         pigRigidbody = GetComponent<Rigidbody>();
-        pigLength = GetComponent<MeshFilter>().mesh.bounds.size.x / 2;
+        pigLength = GetComponent<MeshFilter>().mesh.bounds.size.x;
     }
 
     private void FixedUpdate()
@@ -61,11 +66,11 @@ public class PigMovement : MonoBehaviour
     /// Make the pig start moving. If away is true he moves away.
     /// </summary>
     /// <param name="away"></param>
-    public void Begin(bool away)
+    public override void Run(bool active)
     {
         moving = true;
 
-        if (away)
+        if (active)
         {
             direction = transform.position - player.position;
             destination = GetDestination();
@@ -80,7 +85,7 @@ public class PigMovement : MonoBehaviour
     /// <summary>
     /// Makes the pig stop moving
     /// </summary>
-    public void Stop()
+    public override void Stop()
     {
         moving = false;
     }
