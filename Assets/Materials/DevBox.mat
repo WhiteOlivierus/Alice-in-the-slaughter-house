@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DevGround
+  m_Name: DevBox
   m_Shader: {fileID: 4800000, guid: 295f173b651b2bf438b0a4c870d4b909, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.5518868, g: 0.87432414, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.7699671, b: 0.5529412, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

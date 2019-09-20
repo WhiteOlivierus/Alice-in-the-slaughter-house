@@ -34,10 +34,18 @@ public class GameInput : IInputActionCollection
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""0d32af4d-c06b-498b-a7fc-3b4576488270"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa7ce612-6ef8-498d-9c28-31c72c3b3b7b"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -193,7 +201,7 @@ public class GameInput : IInputActionCollection
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Fire"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -204,7 +212,7 @@ public class GameInput : IInputActionCollection
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Fire"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -215,7 +223,7 @@ public class GameInput : IInputActionCollection
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Touch"",
-                    ""action"": ""Fire"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -226,7 +234,29 @@ public class GameInput : IInputActionCollection
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Joystick"",
-                    ""action"": ""Fire"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""571e8fbc-7f48-4819-828b-824763a6cbc3"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a0c34a4-f70c-4a4d-8025-a15954885ad0"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -649,7 +679,8 @@ public class GameInput : IInputActionCollection
         m_Player = asset.GetActionMap("Player");
         m_Player_Move = m_Player.GetAction("Move");
         m_Player_Look = m_Player.GetAction("Look");
-        m_Player_Fire = m_Player.GetAction("Fire");
+        m_Player_Interact = m_Player.GetAction("Interact");
+        m_Player_Cancel = m_Player.GetAction("Cancel");
         // UI
         m_UI = asset.GetActionMap("UI");
         m_UI_Navigate = m_UI.GetAction("Navigate");
@@ -714,14 +745,16 @@ public class GameInput : IInputActionCollection
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
-    private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Cancel;
     public struct PlayerActions
     {
         private GameInput m_Wrapper;
         public PlayerActions(GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
-        public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -737,9 +770,12 @@ public class GameInput : IInputActionCollection
                 Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                Cancel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
+                Cancel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
+                Cancel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -750,9 +786,12 @@ public class GameInput : IInputActionCollection
                 Look.started += instance.OnLook;
                 Look.performed += instance.OnLook;
                 Look.canceled += instance.OnLook;
-                Fire.started += instance.OnFire;
-                Fire.performed += instance.OnFire;
-                Fire.canceled += instance.OnFire;
+                Interact.started += instance.OnInteract;
+                Interact.performed += instance.OnInteract;
+                Interact.canceled += instance.OnInteract;
+                Cancel.started += instance.OnCancel;
+                Cancel.performed += instance.OnCancel;
+                Cancel.canceled += instance.OnCancel;
             }
         }
     }
@@ -910,7 +949,8 @@ public class GameInput : IInputActionCollection
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

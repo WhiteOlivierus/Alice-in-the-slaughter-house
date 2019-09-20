@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Player movement controller
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
     //Public variables through blackboard
