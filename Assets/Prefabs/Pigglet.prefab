@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4114310214696152942}
   - component: {fileID: 4114310214696152944}
   - component: {fileID: 4114310214696152945}
+  - component: {fileID: 8991042364910570703}
   m_Layer: 0
   m_Name: Pigglet
   m_TagString: Player
@@ -202,10 +203,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30dce96cc558cb240ae80e6c1e9c61ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer:
-    serializedVersion: 2
-    m_Bits: 256
   model: {fileID: 4114310213740783130}
+--- !u!114 &8991042364910570703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312402284298488378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064b42e764dc51848bdd0e6e02ee2124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4114310213740783135
 GameObject:
   m_ObjectHideFlags: 0
