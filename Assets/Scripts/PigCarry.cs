@@ -46,7 +46,7 @@ public class PigCarry : Actions
             closest.GetComponent<Collider>().isTrigger = true;
             closest.position = carryPoint.position;
         }
-        else
+        else if (carryObject)
         {
             //drop object
             Transform closest = carryObject.transform;
