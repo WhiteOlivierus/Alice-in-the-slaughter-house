@@ -1,51 +1,64 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Player movement controller
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
+    //Public variables through blackboard
+    private float Speed = BlackBoard.PlayerSpeed;
 
-    private PlayerInput controls;
-    private Vector3 dir;
-    private Rigidbody playerRigidbody;
+    private GameInput controls;
+    private Vector3 direction;
 
     private void Awake()
     {
-        controls = new PlayerInput();
-        playerRigidbody = GetComponent<Rigidbody>();
+        controls = new GameInput();
     }
 
     private void OnEnable()
     {
-        controls.Player.Move.performed += ctx => Moving(ctx.ReadValue<Vector2>());
-        controls.Player.Move.canceled += ctx => Stopping();
+        controls.Player.Move.performed += ctx => SetDirection(ctx.ReadValue<Vector2>());
+        controls.Player.Move.canceled += ctx => ResetDirection();
         controls.Player.Move.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Player.Move.performed -= ctx => Moving(ctx.ReadValue<Vector2>());
-        controls.Player.Move.canceled -= ctx => Stopping();
+        controls.Player.Move.performed -= ctx => SetDirection(ctx.ReadValue<Vector2>());
+        controls.Player.Move.canceled -= ctx => ResetDirection();
         controls.Player.Move.Disable();
     }
 
-    private void Moving(Vector2 direction)
+    private void Update()
     {
-        dir = new Vector3(direction.x, 0f, direction.y);
+        Move(this.direction);
     }
 
-    private void Stopping()
+    /// <summary>
+    /// Set the input direction to move
+    /// </summary>
+    /// <param name="direction"></param>
+    private void SetDirection(Vector2 direction)
     {
-        dir = Vector3.zero;
+        this.direction = new Vector3(direction.x, 0f, direction.y);
     }
 
-    private void FixedUpdate()
+    /// <summary>
+    /// Reset the input direction to zero
+    /// </summary>
+    private void ResetDirection()
     {
-        Move(dir);
+        this.direction = Vector3.zero;
     }
 
+    /// <summary>
+    /// Move the player towards the input direction
+    /// </summary>
+    /// <param name="direction"></param>
     private void Move(Vector3 direction)
     {
-        playerRigidbody.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+        transform.position += direction * Speed * Time.fixedDeltaTime;
     }
 }
