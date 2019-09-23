@@ -7,9 +7,10 @@ public class PigMovement : Actions
 {
     //Public variables through blackboard
     private float speed = BlackBoard.PigSpeed;
+    private int layer = BlackBoard.PigLayer;
 
     [SerializeField]
-    private LayerMask layer;
+    private MeshFilter model;
 
     private Transform player;
     private Rigidbody pigRigidbody;
@@ -26,16 +27,17 @@ public class PigMovement : Actions
         commands["Come back"] = false;
         player = FindObjectOfType<PlayerMovement>().transform;
         pigRigidbody = GetComponent<Rigidbody>();
-        pigLength = GetComponent<MeshFilter>().mesh.bounds.size.x;
+        pigLength = model.mesh.bounds.size.x;
     }
 
     private void FixedUpdate()
     {
+        Debug.DrawLine(transform.position, destination, Color.red);
+        if (!moving) { return; }
+
         //check if the pig has arrived at destination
         arrived = CheckArrived();
         moving = !arrived;
-
-        if (!moving) { return; }
 
         //move the pig
         Move();
@@ -46,7 +48,7 @@ public class PigMovement : Actions
     /// </summary>
     private void Move()
     {
-        pigRigidbody.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+        pigRigidbody.MovePosition(transform.position + direction.normalized * speed * Time.fixedDeltaTime);
     }
 
     /// <summary>
@@ -73,13 +75,26 @@ public class PigMovement : Actions
         if (active)
         {
             direction = transform.position - player.position;
+            Vector3 lookDirection = new Vector3(direction.x, 0f, direction.z);
+            RotateTowards(lookDirection);
             destination = GetDestination();
         }
         else
         {
             direction = player.position - transform.position;
+            Vector3 lookDirection = new Vector3(direction.x, 0f, direction.z);
+            RotateTowards(lookDirection);
             destination = player.position;
         }
+    }
+
+    /// <summary>
+    /// Make the pig rotate towards where he is going
+    /// </summary>
+    /// <param name="direction">The direction you want the pig to face</param>
+    private void RotateTowards(Vector3 direction)
+    {
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     /// <summary>
@@ -97,9 +112,9 @@ public class PigMovement : Actions
     private Vector3 GetDestination()
     {
         RaycastHit hit;
-        Ray ray = new Ray(transform.position, -transform.up);
+        Ray ray = new Ray(transform.position, transform.forward);
 
-        if (Physics.Raycast(ray, out hit, layer)) { return hit.point; }
+        if (Physics.Raycast(ray, out hit, 1 << layer)) { return hit.point; }
 
         return transform.position;
     }

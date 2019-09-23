@@ -24,6 +24,13 @@ public static class BlackBoard
         private set { }
     }
     
+    private static BlackBoardType<System.Int32> _PigLayer = new BlackBoardType<System.Int32>(nameof(PigLayer), typeof(PigMovement));
+    public static System.Int32 PigLayer
+    {
+        get { return _PigLayer.GetValue(); }
+        private set { }
+    }
+    
     private static BlackBoardType<System.Single> _PlayerSpeed = new BlackBoardType<System.Single>(nameof(PlayerSpeed), typeof(PlayerMovement));
     public static System.Single PlayerSpeed
     {
