@@ -43,6 +43,7 @@ public class PigCarry : Actions
             Transform closest = carryObject.transform;
             closest.SetParent(transform);
             closest.GetComponent<Rigidbody>().isKinematic = true;
+            closest.GetComponent<Collider>().isTrigger = true;
             closest.position = carryPoint.position;
         }
         else
@@ -50,7 +51,9 @@ public class PigCarry : Actions
             //drop object
             Transform closest = carryObject.transform;
             closest.parent = null;
+            closest.GetComponent<Collider>().isTrigger = false;
             closest.GetComponent<Rigidbody>().isKinematic = false;
+            carryObject = default;
         }
     }
 
