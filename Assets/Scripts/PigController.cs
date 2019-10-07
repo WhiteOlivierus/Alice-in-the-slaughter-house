@@ -19,6 +19,7 @@ public class PigController : MonoBehaviour
     private GameInput controls;
     private Transform userInterface;
     private GameObject commandButton;
+    private PigLearnController learnController;
 
     private List<Actions> actions = new List<Actions>();
     private List<GameObject> commandButtons = new List<GameObject>();
@@ -26,9 +27,10 @@ public class PigController : MonoBehaviour
     private void Awake()
     {
         controls = new GameInput();
-        userInterface = GetComponentInChildren<Canvas>().transform;
         commandButton = (GameObject)Resources.Load("CommandButton");
+        userInterface = GetComponentInChildren<Canvas>().transform;
         buttonHeight = commandButton.GetComponent<RectTransform>().rect.size.y + buttonOffset;
+        learnController = FindObjectOfType<PigLearnController>();
         actions = FindObjectsOfType<Actions>().ToList();
     }
 
@@ -88,6 +90,7 @@ public class PigController : MonoBehaviour
 
         Button buttonComponent = buttonObject.GetComponent<Button>();
         buttonComponent.onClick.AddListener(delegate { action.Run(command.Value); });
+        buttonComponent.onClick.AddListener(delegate { Reset(); });
 
         TextMeshProUGUI buttonText = buttonObject.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = command.Key;
