@@ -8,4 +8,9 @@ public class RandomVersion : MonoBehaviour
         int version = Random.Range(1, 4);
         SceneManager.LoadScene("V" + version);
     }
+
+    public void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 }
