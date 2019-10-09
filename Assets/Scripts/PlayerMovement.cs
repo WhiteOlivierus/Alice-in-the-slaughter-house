@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.Disable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move(this.direction);
     }

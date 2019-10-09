@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace BB
 {
@@ -35,23 +35,26 @@ namespace BB
 
         public static void Write<T>(T data, string path)
         {
-            DoesDataExist(path);
-
-            using (FileStream fileStream = new FileStream(path, FileMode.Create))
+            if (Application.isEditor)
             {
-                try
+                DoesDataExist(path);
+
+                using (FileStream fileStream = new FileStream(path, FileMode.Create))
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(fileStream, data);
-                }
-                catch (SerializationException e)
-                {
-                    Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-                    throw;
-                }
-                finally
-                {
-                    fileStream.Close();
+                    try
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        formatter.Serialize(fileStream, data);
+                    }
+                    catch (SerializationException e)
+                    {
+                        Console.WriteLine("Failed to serialize. Reason: " + e.Message);
+                        throw;
+                    }
+                    finally
+                    {
+                        fileStream.Close();
+                    }
                 }
             }
         }

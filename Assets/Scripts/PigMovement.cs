@@ -33,7 +33,7 @@ public class PigMovement : Actions
         pigLength = model.mesh.bounds.size.x + 0.5f;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Debug.DrawLine(transform.position, destination, Color.red);
         if (!moving)
@@ -80,7 +80,7 @@ public class PigMovement : Actions
     {
         moving = true;
 
-        if (param)
+        if (param == true)
         {
             direction = transform.position - player.position;
             Vector3 lookDirection = new Vector3(direction.x, 0f, direction.z);

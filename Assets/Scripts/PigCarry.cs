@@ -29,7 +29,7 @@ public class PigCarry : Actions
     /// <param name="param"></param>
     public override void Run(dynamic param)
     {
-        if (param && !carryObject)
+        if (param == true && !carryObject)
         {
             //grab object in range
             RaycastHit[] pickupable;
