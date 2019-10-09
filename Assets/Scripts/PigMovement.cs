@@ -25,17 +25,23 @@ public class PigMovement : Actions
     {
         commands["Move away"] = true;
         commands["Come back"] = false;
-        idle = FindObjectOfType<PigIdle>();
+        if (FindObjectOfType<PigIdle>())
+            idle = FindObjectOfType<PigIdle>();
 
         player = FindObjectOfType<PlayerMovement>().transform;
         pigRigidbody = GetComponent<Rigidbody>();
-        pigLength = model.mesh.bounds.size.x;
+        pigLength = model.mesh.bounds.size.x + 0.5f;
     }
 
     private void FixedUpdate()
     {
         Debug.DrawLine(transform.position, destination, Color.red);
-        if (!moving) { Stop(); return; }
+        if (!moving)
+        {
+            if (idle)
+                idle.isActive = false;
+            return;
+        }
 
         //check if the pig has arrived at destination
         arrived = CheckArrived();
@@ -60,7 +66,7 @@ public class PigMovement : Actions
     private bool CheckArrived()
     {
         float distance = Vector3.Distance(transform.position, destination);
-
+        print(distance + "-" + pigLength);
         if (distance < pigLength) { return true; }
 
         return false;
@@ -72,8 +78,6 @@ public class PigMovement : Actions
     /// <param name="away"></param>
     public override void Run(dynamic param)
     {
-        // base.Run(param);
-
         moving = true;
 
         if (param)

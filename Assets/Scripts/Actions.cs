@@ -14,16 +14,14 @@ public abstract class Actions : MonoBehaviour
     /// Run the action
     /// </summary>
     /// <param name="param">Action can go two ways</param>
-    public virtual void Run(dynamic param)
-    {
-        idle.isActive = true;
-    }
+    public virtual void Run(dynamic param) { }
 
     /// <summary>
     /// Stop the action from running
     /// </summary>
     public virtual void Stop()
     {
-        idle.isActive = false;
+        if(idle)
+            idle.isActive = false;
     }
 }

@@ -48,6 +48,14 @@ public class GameInput : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToMain"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfafd5b1-cff9-444b-9546-b9be03e62162"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -257,6 +265,17 @@ public class GameInput : IInputActionCollection
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bc3b540-85b2-4c39-a037-217a55734998"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ToMain"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -681,6 +700,7 @@ public class GameInput : IInputActionCollection
         m_Player_Look = m_Player.GetAction("Look");
         m_Player_Interact = m_Player.GetAction("Interact");
         m_Player_Cancel = m_Player.GetAction("Cancel");
+        m_Player_ToMain = m_Player.GetAction("ToMain");
         // UI
         m_UI = asset.GetActionMap("UI");
         m_UI_Navigate = m_UI.GetAction("Navigate");
@@ -747,6 +767,7 @@ public class GameInput : IInputActionCollection
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Cancel;
+    private readonly InputAction m_Player_ToMain;
     public struct PlayerActions
     {
         private GameInput m_Wrapper;
@@ -755,6 +776,7 @@ public class GameInput : IInputActionCollection
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
+        public InputAction @ToMain => m_Wrapper.m_Player_ToMain;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -776,6 +798,9 @@ public class GameInput : IInputActionCollection
                 Cancel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
                 Cancel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
                 Cancel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
+                ToMain.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToMain;
+                ToMain.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToMain;
+                ToMain.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToMain;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -792,6 +817,9 @@ public class GameInput : IInputActionCollection
                 Cancel.started += instance.OnCancel;
                 Cancel.performed += instance.OnCancel;
                 Cancel.canceled += instance.OnCancel;
+                ToMain.started += instance.OnToMain;
+                ToMain.performed += instance.OnToMain;
+                ToMain.canceled += instance.OnToMain;
             }
         }
     }
@@ -951,6 +979,7 @@ public class GameInput : IInputActionCollection
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnToMain(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

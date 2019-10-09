@@ -29,8 +29,6 @@ public class PigCarry : Actions
     /// <param name="param"></param>
     public override void Run(dynamic param)
     {
-        // base.Run(param);
-
         if (param && !carryObject)
         {
             //grab object in range
@@ -58,8 +56,9 @@ public class PigCarry : Actions
             closest.GetComponent<Collider>().isTrigger = false;
             closest.GetComponent<Rigidbody>().isKinematic = false;
             carryObject = default;
-            Stop();
         }
+
+        idle.isActive = false;
     }
 
     /// <summary>

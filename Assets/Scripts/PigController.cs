@@ -32,7 +32,10 @@ public class PigController : MonoBehaviour
         userInterface = GetComponentInChildren<Canvas>().transform;
         buttonHeight = commandButton.GetComponent<RectTransform>().rect.size.y + buttonOffset;
         learnController = FindObjectOfType<PigLearnController>();
-        pigIdle = FindObjectOfType<PigIdle>();
+
+        if (FindObjectOfType<PigIdle>())
+            pigIdle = FindObjectOfType<PigIdle>();
+
         actions = FindObjectsOfType<Actions>().ToList();
     }
 
@@ -91,7 +94,8 @@ public class PigController : MonoBehaviour
         buttonObject.name = buttonObject.name.Replace("(Clone)", "");
 
         Button buttonComponent = buttonObject.GetComponent<Button>();
-        buttonComponent.onClick.AddListener(delegate { pigIdle.idle = false; });
+        if(pigIdle)
+            buttonComponent.onClick.AddListener(delegate { pigIdle.isActive = true; });
         buttonComponent.onClick.AddListener(delegate { action.Run(command.Value); });
         buttonComponent.onClick.AddListener(delegate { Reset(); });
 
