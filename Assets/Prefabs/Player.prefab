@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 593853838}
   - component: {fileID: 2831210695127558882}
   - component: {fileID: 1783063983}
+  - component: {fileID: 2003206371}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -401,6 +402,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &2003206371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831210693138647327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53e073275418b24cb04214a1dc6a5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparent: {fileID: 2100000, guid: e91ae097ea3e3844b9a68e46993b42a6, type: 2}
+  normal: {fileID: 2100000, guid: 0b929fc12c6b7444ca542774e4a86174, type: 2}
+  occluders: []
+  newOccluders: []
 --- !u!1 &2831210694436997009
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +479,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 7.5
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

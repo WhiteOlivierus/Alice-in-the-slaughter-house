@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1552765558201102766}
   - component: {fileID: 7554663800642112408}
   - component: {fileID: 4317553292160628577}
+  - component: {fileID: 534135152}
   m_Layer: 0
   m_Name: MD_PigLet_LowRes
   m_TagString: Untagged
@@ -78,6 +79,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &534135152
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582763622797099965}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.13
+  m_Height: 0.36
+  m_Direction: 0
+  m_Center: {x: 0.00000011920929, y: 0, z: -5.684342e-14}
 --- !u!1 &7416885613988496561
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +106,7 @@ GameObject:
   - component: {fileID: 5602605001005408763}
   - component: {fileID: 5602605001005408762}
   - component: {fileID: 584937587781861956}
+  - component: {fileID: 6396073143154523442}
   m_Layer: 0
   m_Name: PiggletLowPolyNoIdle
   m_TagString: Player
@@ -171,6 +187,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064b42e764dc51848bdd0e6e02ee2124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6396073143154523442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7416885613988496561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53e073275418b24cb04214a1dc6a5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparent: {fileID: 2100000, guid: 0b929fc12c6b7444ca542774e4a86174, type: 2}
+  normal: {fileID: 2100000, guid: e91ae097ea3e3844b9a68e46993b42a6, type: 2}
+  occluders: []
+  newOccluders: []
 --- !u!1 &8419625496162145408
 GameObject:
   m_ObjectHideFlags: 0

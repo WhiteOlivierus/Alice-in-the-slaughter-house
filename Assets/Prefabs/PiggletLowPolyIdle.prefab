@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 5052279155233166286}
   - component: {fileID: 271099075188404336}
   - component: {fileID: 9152926638702484586}
+  - component: {fileID: 3197750100158006657}
   m_Layer: 0
   m_Name: PiggletLowPolyIdle
   m_TagString: Player
@@ -200,6 +201,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
+--- !u!114 &3197750100158006657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868682058132158085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53e073275418b24cb04214a1dc6a5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparent: {fileID: 2100000, guid: 0b929fc12c6b7444ca542774e4a86174, type: 2}
+  normal: {fileID: 2100000, guid: e91ae097ea3e3844b9a68e46993b42a6, type: 2}
+  occluders: []
+  newOccluders: []
 --- !u!1 &9152926639264933556
 GameObject:
   m_ObjectHideFlags: 0
