@@ -66,7 +66,7 @@ public class PigMovement : Actions
     private bool CheckArrived()
     {
         float distance = Vector3.Distance(transform.position, destination);
-        print(distance + "-" + pigLength);
+
         if (distance < pigLength) { return true; }
 
         return false;
