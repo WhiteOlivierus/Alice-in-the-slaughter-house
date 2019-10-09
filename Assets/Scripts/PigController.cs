@@ -13,7 +13,7 @@ public class PigController : MonoBehaviour
     //Public variables through blackboard
     private int buttonOffset = BlackBoard.ButtonOffset;
 
-    private float buttonHeight;
+    private Vector2 buttonSize;
     private bool active = false;
 
     private GameInput controls;
@@ -30,7 +30,7 @@ public class PigController : MonoBehaviour
         controls = new GameInput();
         commandButton = (GameObject)Resources.Load("CommandButton");
         userInterface = GetComponentInChildren<Canvas>().transform;
-        buttonHeight = commandButton.GetComponent<RectTransform>().rect.size.y + buttonOffset;
+        buttonSize = commandButton.GetComponent<RectTransform>().rect.size;
         learnController = FindObjectOfType<PigLearnController>();
 
         if (FindObjectOfType<PigIdle>())
@@ -72,7 +72,22 @@ public class PigController : MonoBehaviour
             foreach (KeyValuePair<string, dynamic> command in action.commands)
             {
                 commandButtons.Add(SetupButton(input, offset, action, command));
-                offset.y -= buttonHeight;
+                if (input.x < Screen.width / 2 && input.y < Screen.height / 2)
+                {
+                    offset.y += buttonSize.y + buttonOffset;
+                }
+                else if (input.x > Screen.width / 2 && input.y < Screen.height / 2)
+                {
+                    offset.y += buttonSize.y + buttonOffset;
+                }
+                else if (input.x > Screen.width / 2 && input.y > Screen.height / 2)
+                {
+                    offset.y -= buttonSize.y + buttonOffset;
+                }
+                else if (input.x < Screen.width / 2 && input.y > Screen.height / 2)
+                {
+                    offset.y -= buttonSize.y + buttonOffset;
+                }
             }
         }
 
@@ -94,7 +109,7 @@ public class PigController : MonoBehaviour
         buttonObject.name = buttonObject.name.Replace("(Clone)", "");
 
         Button buttonComponent = buttonObject.GetComponent<Button>();
-        if(pigIdle)
+        if (pigIdle)
             buttonComponent.onClick.AddListener(delegate { pigIdle.isActive = true; });
         buttonComponent.onClick.AddListener(delegate { action.Run(command.Value); });
         buttonComponent.onClick.AddListener(delegate { Reset(); });
