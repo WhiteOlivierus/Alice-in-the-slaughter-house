@@ -36,6 +36,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToMain",
+                    "type": "Button",
+                    "id": "cfafd5b1-cff9-444b-9546-b9be03e62162",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -245,6 +253,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1bc3b540-85b2-4c39-a037-217a55734998",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToMain",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

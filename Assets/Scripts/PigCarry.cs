@@ -19,16 +19,17 @@ public class PigCarry : Actions
     {
         commands["Grab"] = true;
         commands["Drop"] = false;
+        idle = FindObjectOfType<PigIdle>();
     }
 
     /// <summary>
     /// Go and grab the clossest object if true,
     /// Else drop the object you have.
     /// </summary>
-    /// <param name="active"></param>
-    public override void Run(bool active)
+    /// <param name="param"></param>
+    public override void Run(dynamic param)
     {
-        if (active && !carryObject)
+        if (param && !carryObject)
         {
             //grab object in range
             RaycastHit[] pickupable;
@@ -45,6 +46,7 @@ public class PigCarry : Actions
             closest.GetComponent<Rigidbody>().isKinematic = true;
             closest.GetComponent<Collider>().isTrigger = true;
             closest.position = carryPoint.position;
+            Stop();
         }
         else if (carryObject)
         {
@@ -55,6 +57,8 @@ public class PigCarry : Actions
             closest.GetComponent<Rigidbody>().isKinematic = false;
             carryObject = default;
         }
+
+        idle.isActive = false;
     }
 
     /// <summary>
@@ -76,9 +80,4 @@ public class PigCarry : Actions
             }
         }
     }
-
-    /// <summary>
-    /// Stop what your doing
-    /// </summary>
-    public override void Stop() { }
 }

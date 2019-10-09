@@ -17,6 +17,27 @@ public static class BlackBoard
         private set { }
     }
     
+    private static BlackBoardType<System.Single> _minTime = new BlackBoardType<System.Single>(nameof(minTime), typeof(PigIdle));
+    public static System.Single minTime
+    {
+        get { return _minTime.GetValue(); }
+        private set { }
+    }
+    
+    private static BlackBoardType<System.Single> _maxTime = new BlackBoardType<System.Single>(nameof(maxTime), typeof(PigIdle));
+    public static System.Single maxTime
+    {
+        get { return _maxTime.GetValue(); }
+        private set { }
+    }
+    
+    private static BlackBoardType<System.Single> _cooldown = new BlackBoardType<System.Single>(nameof(cooldown), typeof(PigIdle));
+    public static System.Single cooldown
+    {
+        get { return _cooldown.GetValue(); }
+        private set { }
+    }
+    
     private static BlackBoardType<System.Single> _PigSpeed = new BlackBoardType<System.Single>(nameof(PigSpeed), typeof(PigMovement));
     public static System.Single PigSpeed
     {

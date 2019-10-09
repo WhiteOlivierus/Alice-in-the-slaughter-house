@@ -135,8 +135,9 @@ GameObject:
   - component: {fileID: 4114310214696152944}
   - component: {fileID: 4114310214696152945}
   - component: {fileID: 8991042364910570703}
+  - component: {fileID: 1080254677}
   m_Layer: 0
-  m_Name: Pigglet
+  m_Name: PiggletSimple 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,8 +150,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312402284298488378}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.75, z: 2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.827, z: 2.116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2132143904}
@@ -216,6 +217,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064b42e764dc51848bdd0e6e02ee2124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1080254677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312402284298488378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c6337c1acaca04fa30e56dbc44c7af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!1 &4114310213740783135
 GameObject:
   m_ObjectHideFlags: 0
