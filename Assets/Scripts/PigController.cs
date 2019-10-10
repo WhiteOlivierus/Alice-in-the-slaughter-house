@@ -6,19 +6,21 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 /// <summary>
-/// Here will all of the pig behaviours be accessable by the player
+/// Here will all of the pig behaviors be accessable by the player
 /// </summary>
 public class PigController : MonoBehaviour
 {
     //Public variables through blackboard
     private int buttonOffset = BlackBoard.ButtonOffset;
 
-    private float buttonHeight;
+    private Vector2 buttonSize;
     private bool active = false;
 
     private GameInput controls;
     private Transform userInterface;
     private GameObject commandButton;
+    private PigLearnController learnController;
+    private PigIdle pigIdle;
 
     private List<Actions> actions = new List<Actions>();
     private List<GameObject> commandButtons = new List<GameObject>();
@@ -26,9 +28,14 @@ public class PigController : MonoBehaviour
     private void Awake()
     {
         controls = new GameInput();
-        userInterface = GetComponentInChildren<Canvas>().transform;
         commandButton = (GameObject)Resources.Load("CommandButton");
-        buttonHeight = commandButton.GetComponent<RectTransform>().rect.size.y + buttonOffset;
+        userInterface = GetComponentInChildren<Canvas>().transform;
+        buttonSize = commandButton.GetComponent<RectTransform>().rect.size;
+        learnController = FindObjectOfType<PigLearnController>();
+
+        if (FindObjectOfType<PigIdle>())
+            pigIdle = FindObjectOfType<PigIdle>();
+
         actions = FindObjectsOfType<Actions>().ToList();
     }
 
@@ -62,10 +69,25 @@ public class PigController : MonoBehaviour
 
         foreach (Actions action in actions)
         {
-            foreach (KeyValuePair<string, bool> command in action.commands)
+            foreach (KeyValuePair<string, dynamic> command in action.commands)
             {
                 commandButtons.Add(SetupButton(input, offset, action, command));
-                offset.y -= buttonHeight;
+                if (input.x < Screen.width / 2 && input.y < Screen.height / 2)
+                {
+                    offset.y += buttonSize.y + buttonOffset;
+                }
+                else if (input.x > Screen.width / 2 && input.y < Screen.height / 2)
+                {
+                    offset.y += buttonSize.y + buttonOffset;
+                }
+                else if (input.x > Screen.width / 2 && input.y > Screen.height / 2)
+                {
+                    offset.y -= buttonSize.y + buttonOffset;
+                }
+                else if (input.x < Screen.width / 2 && input.y > Screen.height / 2)
+                {
+                    offset.y -= buttonSize.y + buttonOffset;
+                }
             }
         }
 
@@ -80,14 +102,17 @@ public class PigController : MonoBehaviour
     /// <param name="action"></param>
     /// <param name="command"></param>
     /// <returns></returns>
-    private GameObject SetupButton(Vector2 input, Vector2 offset, Actions action, KeyValuePair<string, bool> command)
+    private GameObject SetupButton(Vector2 input, Vector2 offset, Actions action, KeyValuePair<string, dynamic> command)
     {
         GameObject buttonObject = Instantiate(commandButton, userInterface, true);
         buttonObject.transform.position = input + offset;
         buttonObject.name = buttonObject.name.Replace("(Clone)", "");
 
         Button buttonComponent = buttonObject.GetComponent<Button>();
+        if (pigIdle)
+            buttonComponent.onClick.AddListener(delegate { pigIdle.isActive = true; });
         buttonComponent.onClick.AddListener(delegate { action.Run(command.Value); });
+        buttonComponent.onClick.AddListener(delegate { Reset(); });
 
         TextMeshProUGUI buttonText = buttonObject.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = command.Key;

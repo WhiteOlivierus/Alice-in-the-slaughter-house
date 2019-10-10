@@ -2,20 +2,26 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// All of the actions able in a behaviour are here
+/// All of the actions able in a behavior are here
 /// </summary>
 public abstract class Actions : MonoBehaviour
 {
-    public Dictionary<string, bool> commands = new Dictionary<string, bool>();
+    internal PigIdle idle;
+
+    public Dictionary<string, dynamic> commands = new Dictionary<string, dynamic>();
 
     /// <summary>
     /// Run the action
     /// </summary>
-    /// <param name="active">Action can go two ways</param>
-    public virtual void Run(bool active) { }
+    /// <param name="param">Action can go two ways</param>
+    public virtual void Run(dynamic param) { }
 
     /// <summary>
     /// Stop the action from running
     /// </summary>
-    public virtual void Stop() { }
+    public virtual void Stop()
+    {
+        if(idle)
+            idle.isActive = false;
+    }
 }

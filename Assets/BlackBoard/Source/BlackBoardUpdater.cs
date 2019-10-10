@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 namespace BB
 {
@@ -17,8 +18,11 @@ namespace BB
         public static void UpdateBlackBoard()
         {
             LoadBlackBoard();
-            SaveBlackBoard();
+            if (Application.isEditor)
+                SaveBlackBoard();
+            #if UNITY_EDITOR
             AssetDatabase.ImportAsset(blackBoardPath);
+            #endif
         }
 
         private static void LoadBlackBoard()

@@ -9,7 +9,17 @@ namespace BB
     public static class BlackBoardManager
     {
         private const string scriptsLocationPath = "Assets/Scripts/";
-        private const string blackBoardBinaryDataPath = "Assets/BlackBoard/Data/BlackBoardCache.dat";
+        private static string blackBoardBinaryDataPath
+        {
+            get {
+                if (Application.isEditor)
+                {
+                    return "Assets/StreamingAssets/BlackBoardCache.dat";
+                }
+                return Application.streamingAssetsPath + "/BlackBoardCache.dat";
+            }
+            set { }
+        }
 
         private static Dictionary<string, List<BlackBoardParameter>> scriptInstances = new Dictionary<string, List<BlackBoardParameter>>();
 
