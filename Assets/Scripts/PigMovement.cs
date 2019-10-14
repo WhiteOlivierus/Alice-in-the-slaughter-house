@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Pig movement behaviour
+/// Pig movement behavior
 /// </summary>
 public class PigMovement : Actions
 {
@@ -30,7 +30,7 @@ public class PigMovement : Actions
 
         player = FindObjectOfType<PlayerMovement>().transform;
         pigRigidbody = GetComponent<Rigidbody>();
-        pigLength = model.mesh.bounds.size.x + 0.5f;
+        pigLength = model.mesh.bounds.size.x + 2f;
     }
 
     private void Update()
