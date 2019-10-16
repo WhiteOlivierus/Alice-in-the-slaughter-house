@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/main.unity
     guid: 4399a2dbdffd1f242a5823d25f4d906d
   - enabled: 1
-    path: Assets/Scenes/Versions/idle.unity
+    path: Assets/Scenes/Versions/V1.unity
     guid: eb59b4ad08ad5024b9f9493a099c6437
   - enabled: 1
-    path: Assets/Scenes/Versions/noidle.unity
+    path: Assets/Scenes/Versions/V2.unity
     guid: afbc4b050b4340942a8d519691c0ca14
+  - enabled: 1
+    path: Assets/Scenes/BaseGoalLevel.unity
+    guid: 93870605e7544d44b8d73d676cd500e0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 0043ee734db91674bac05066822f63e1,
       type: 2}
