@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!136 &7698247593330886258
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2272570180118341458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.82
+  m_Height: 4.32
+  m_Direction: 1
+  m_Center: {x: 0.000087604974, y: -0.0000109686225, z: 0.0013496795}
 --- !u!1001 &4707085677278762893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,22 +24,22 @@ PrefabInstance:
     - target: {fileID: 7868682058132158085, guid: 444bfcab57ff58b4094199c57dc69cd4,
         type: 3}
       propertyPath: m_Name
-      value: PiggletLowPolyIdle
+      value: PiggletLowPolyNoIdle
       objectReference: {fileID: 0}
     - target: {fileID: 7868682058132158081, guid: 444bfcab57ff58b4094199c57dc69cd4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.17901158
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7868682058132158081, guid: 444bfcab57ff58b4094199c57dc69cd4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5032833
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7868682058132158081, guid: 444bfcab57ff58b4094199c57dc69cd4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9261417
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7868682058132158081, guid: 444bfcab57ff58b4094199c57dc69cd4,
         type: 3}
@@ -69,4 +83,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9152926638702484586, guid: 444bfcab57ff58b4094199c57dc69cd4, type: 3}
+    - {fileID: 1420740100360389688, guid: 444bfcab57ff58b4094199c57dc69cd4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 444bfcab57ff58b4094199c57dc69cd4, type: 3}
+--- !u!1 &2272570180118341458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6835100780616151263, guid: 444bfcab57ff58b4094199c57dc69cd4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4707085677278762893}
+  m_PrefabAsset: {fileID: 0}
