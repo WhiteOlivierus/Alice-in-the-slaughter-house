@@ -21,6 +21,10 @@ public class RangeCounter : MonoBehaviour
         {
             min = min + 1;
             SetObject();
+            if (min >= max)
+            {
+                FindObjectOfType<VersionUI>().GoToMain();
+            }
         }
     }
     public int Max

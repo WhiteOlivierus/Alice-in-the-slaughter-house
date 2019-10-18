@@ -67,7 +67,7 @@ public class PigMovement : Actions
     {
         float distance = Vector3.Distance(transform.position, destination);
 
-        if (distance < pigLength) { return true; }
+        if (distance < pigLength) { Stop(); return true; }
 
         return false;
     }
@@ -78,6 +78,9 @@ public class PigMovement : Actions
     /// <param name="away"></param>
     public override void Run(dynamic param)
     {
+        if (idle)
+            idle.isActive = true;
+
         moving = true;
 
         if (param == true)

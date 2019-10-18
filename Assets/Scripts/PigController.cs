@@ -67,27 +67,35 @@ public class PigController : MonoBehaviour
 
         ClearCommands(ref commandButtons);
 
-        foreach (Actions action in actions)
+        List<Actions> copy = new List<Actions>(actions);
+        if (input.y < Screen.height / 2) { copy.Reverse(); }
+
+        foreach (Actions action in copy)
         {
             foreach (KeyValuePair<string, dynamic> command in action.commands)
             {
-                commandButtons.Add(SetupButton(input, offset, action, command));
                 if (input.x < Screen.width / 2 && input.y < Screen.height / 2)
                 {
                     offset.y += buttonSize.y + buttonOffset;
+                    offset.x = buttonSize.x / 2;
                 }
                 else if (input.x > Screen.width / 2 && input.y < Screen.height / 2)
                 {
                     offset.y += buttonSize.y + buttonOffset;
+                    offset.x = -buttonSize.x / 2;
                 }
                 else if (input.x > Screen.width / 2 && input.y > Screen.height / 2)
                 {
                     offset.y -= buttonSize.y + buttonOffset;
+                    offset.x = -buttonSize.x / 2;
                 }
                 else if (input.x < Screen.width / 2 && input.y > Screen.height / 2)
                 {
                     offset.y -= buttonSize.y + buttonOffset;
+                    offset.x = buttonSize.x / 2;
                 }
+
+                commandButtons.Add(SetupButton(input, offset, action, command));
             }
         }
 

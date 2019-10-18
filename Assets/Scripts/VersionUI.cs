@@ -24,7 +24,7 @@ public class VersionUI : MonoBehaviour
         controls.Player.ToMain.Disable();
     }
 
-    private void GoToMain()
+    public void GoToMain()
     {
         SceneManager.LoadScene("main");
     }
